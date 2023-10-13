@@ -48,8 +48,8 @@
       <div>
         <label for="content">내용</label>
       </div>
-      <div id="content">
-        <textarea name="content" rows="5" cols="30" ></textarea>        
+      <div>
+        <textarea name="content" id="content" rows="5" cols="30" ></textarea>        
       </div>
       <div>
         <button type="submit" id="btn_done">작성완료</button>

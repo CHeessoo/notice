@@ -13,19 +13,24 @@
   $(function(){
 	fnModify();
 	fnBack();
+	fnList();
   })
   
   function fnModify(){
-	var modifyResult = '${modifyResult}';
-	if(modifyResult !== ''){
-	  if(modifyResult === '1'){
-		$('#frm_modify').attr('action', '${contextPath}/notice/modify.do'); 
-		alert('공지사항이 수정되었습니다.');
-		$('#frm_modify').submit();
-	  } else {
-		alert('공지사항 수정이 실패했습니다.');
-	  }
-	}
+    var modifyResult = '${modifyResult}';
+    if(modifyResult !== ''){
+  	  if(modifyResult === '1'){
+  	    alert('공지사항이 수정되었습니다.');
+   	  } else {
+  	    alert('공지사항 수정이 실패했습니다.');
+  	  }
+    }
+  }
+  
+  function fnList(){
+	$('#btn_list').click(function(){
+	  location.href = "${contextPath}/notice/list.do";
+	})
   }
   
   function fnBack(){
@@ -34,12 +39,12 @@
 	})
   }
   
-
+  
 </script>
 <style>
-  .btn_back {
+  #btn_back {
     border: none;
-    background-color: none;
+    background-color: transparent;
   }
 </style>
 </head>
@@ -49,11 +54,11 @@
     <div>
       <button type="button" id="btn_back"> ← 뒤로가기 </button>
     </div>
-    <h1>${notice.notice_no}번 공지사항</h1>
-    <form method="post" action="${contextPath}/notice/modify.do" id="frm_modify">
+    <h1>공지사항 편집하기</h1>
+    <form method="post" action="${contextPath}/notice/modify.do" >
       <div>
         <label for="gubun">구분</label>
-        <select id="gubun" name="gubun" value="${notice.gubun}">
+        <select id="gubun" name="gubun">
           <option value="1">긴급</option>
           <option value="2">일반</option>
         </select>
@@ -65,11 +70,13 @@
       <div>
         <label for="content">내용</label>
       </div>
-      <div id="content">
-        <textarea name="content" rows="5" cols="30" value="${notice.content}"></textarea>        
-      </div>
       <div>
-        <button type="submit">편집완료</button>
+        <textarea name="content" id="content" rows="5" cols="30" ></textarea>        
+      </div>
+      <hr>
+      <div>
+        <input type="hidden" name="notice_no" value="${notice.notice_no}">
+        <button type="submit" >편집완료</button>
         <button type="button" id="btn_list">목록</button>
       </div>
     </form>

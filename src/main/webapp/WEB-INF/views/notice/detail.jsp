@@ -18,8 +18,8 @@
   
   function fnModify(){
 	$('#btn_modify').click(function(){
-		location.href = '${contextPath}/notice/modifydetail.do';
-	})
+	  location.href = '${contextPath}/notice/modifyDetail.do';  
+    })
   }
   
   function fnDelete(){
@@ -43,21 +43,19 @@
 <body>
 
   <div>
-    <h1>${notice.notice_no}번 공지사항</h1>
-    <div>구분 : 
-      <c:choose>
-        <c:when test="${notice.gubun==1}">긴급</c:when>
-        <c:when test="${notice.gubun==2}">일반</c:when>
-      </c:choose>
-     </div>
-    <div>제목 : ${notice.title}</div>
-    <div>${notice.content}</div>
-  </div>
-  
-  <hr>
-  
-  <div>
-    <form action="${contextPath}/" method="post" id="frm_modify">
+    <form action="#" method="post" id="frm_modify">
+      <h1>${notice.notice_no}번 공지사항</h1>
+      <div>구분 : 
+        <c:choose>
+          <c:when test="${notice.gubun==1}">긴급</c:when>
+          <c:when test="${notice.gubun==2}">일반</c:when>
+        </c:choose>
+       </div>
+      <div>제목 : ${notice.title}</div>
+      <div>${notice.content}</div>
+    
+      <hr>
+    
       <input type="hidden" id="notice_no" name="notice_no" value="${notice.notice_no}">
       <button type="button" id="btn_modify">편집</button>
       <button type="button" id="btn_delete">삭제</button>

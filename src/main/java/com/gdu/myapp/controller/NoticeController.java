@@ -13,6 +13,7 @@ import com.gdu.myapp.dto.NoticeDto;
 import com.gdu.myapp.service.NoticeService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @RequiredArgsConstructor
 @Controller
@@ -39,23 +40,23 @@ public class NoticeController {
     return "redirect:/notice/list.do";
   }
   
+
   @RequestMapping(value="/notice/detail.do", method=RequestMethod.GET)
   public String detail(@RequestParam(value="notice_no", required=false, defaultValue="0") int notice_no, Model model) {
     model.addAttribute("notice", noticeService.getNoticeByNo(notice_no));
-    return "notice/detail";
+    return "/notice/detail";      
   }
-  
-  @RequestMapping(value="/notice/modifydetail.do", method=RequestMethod.GET)
-  public String modfyDtail(@RequestParam(value="notice_no", required=false, defaultValue="0") int notice_no, Model model) {
+  @RequestMapping(value="/notice/modifyDetail.do", method=RequestMethod.GET)
+  public String modifyDetail(@RequestParam(value="notice_no", required=false, defaultValue="0") int notice_no, Model model) {
     model.addAttribute("notice", noticeService.getNoticeByNo(notice_no));
-    return "notice/modifyDetail";
+    return "/notice/modifyDetail";      
   }
   
   @RequestMapping(value="/notice/modify.do", method=RequestMethod.POST)
   public String modify(NoticeDto noticeDto, RedirectAttributes redirectAttributes) {
     int modifyResult = noticeService.modifyNotice(noticeDto);
     redirectAttributes.addFlashAttribute("modifyResult", modifyResult);
-    return "redirct:/notice/detail.do?notice_no=" + noticeDto.getNotice_no();
+    return "redirect:/notice/detail.do?notice_no=" + noticeDto.getNotice_no();
   }
   
   @RequestMapping(value="/notice/delete.do", method=RequestMethod.POST)
